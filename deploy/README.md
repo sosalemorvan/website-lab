@@ -48,7 +48,7 @@ itself — no SSH keys or secrets are ever given to GitHub Actions.
    systemctl list-timers | grep website-lab
    ```
    (A plain cron entry works just as well if you'd rather not use systemd:
-   `*/5 * * * * /opt/website-lab/deploy.sh >> /opt/website-lab/deploy.log 2>&1`)
+   `0 */5 * * * /opt/website-lab/deploy.sh >> /opt/website-lab/deploy.log 2>&1`)
 
 ## Releasing a change to the VPS
 
@@ -61,7 +61,7 @@ git merge master
 git push origin production
 ```
 
-Within one polling interval (default 5 min) the VPS pulls, rebuilds the
+Within one polling interval (default 5 hours) the VPS pulls, rebuilds the
 Docker image, and restarts the container. To skip the wait, SSH in and run
 `./deploy.sh --force` (or just `./deploy.sh`, which no-ops if there's
 nothing new) — this is also the manual-update path if the timer is ever

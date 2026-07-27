@@ -1,9 +1,9 @@
 [Unit]
-Description=Run website-lab-deploy every 5 minutes
+Description=Run website-lab-deploy every 5 hours
 
 [Timer]
 OnBootSec=1min
-OnUnitActiveSec=5min
+OnUnitActiveSec=5h
 Unit=website-lab-deploy.service
 
 [Install]
