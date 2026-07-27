@@ -1,10 +1,16 @@
 # Example Nginx reverse proxy config for the university domain.
-# Copy to /etc/nginx/sites-available/website-lab, symlink into
-# sites-enabled, then `nginx -t && systemctl reload nginx`.
 #
-# Once the university DNS record points at this VPS, run:
-#   certbot --nginx -d your-university-domain.example
-# to obtain and auto-configure TLS.
+# This VPS already runs Nginx for other sites, so do NOT add this config
+# until you have the real domain name to put in `server_name` below —
+# without it, this block would either be ignored or risk intercepting
+# traffic meant for the other sites on this box.
+#
+# Once you have the domain and its DNS A record points at this VPS:
+#   1. Fill in server_name below
+#   2. Copy to /etc/nginx/sites-available/website-lab
+#   3. ln -s /etc/nginx/sites-available/website-lab /etc/nginx/sites-enabled/
+#   4. nginx -t && systemctl reload nginx
+#   5. certbot --nginx -d your-university-domain.example   (adds HTTPS)
 
 server {
     listen 80;
