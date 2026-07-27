@@ -1,0 +1,10 @@
+[Unit]
+Description=Poll website-lab production branch and deploy if updated
+Wants=network-online.target
+After=network-online.target docker.service
+
+[Service]
+Type=oneshot
+# Adjust to wherever you cloned the repo on the VPS
+WorkingDirectory=/opt/website-lab
+ExecStart=/opt/website-lab/deploy.sh

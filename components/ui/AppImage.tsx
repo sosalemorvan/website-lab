@@ -1,7 +1,7 @@
 import Image, { ImageProps } from "next/image";
 
 const basePath =
-  process.env.NODE_ENV === "production" ? "/website-lab" : "";
+  process.env.GITHUB_PAGES === "true" ? "/website-lab" : "";
 
 export default function AppImage({ src, ...props }: ImageProps) {
   const finalSrc =

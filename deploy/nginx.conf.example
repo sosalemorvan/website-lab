@@ -1,0 +1,24 @@
+# Example Nginx reverse proxy config for the university domain.
+# Copy to /etc/nginx/sites-available/website-lab, symlink into
+# sites-enabled, then `nginx -t && systemctl reload nginx`.
+#
+# Once the university DNS record points at this VPS, run:
+#   certbot --nginx -d your-university-domain.example
+# to obtain and auto-configure TLS.
+
+server {
+    listen 80;
+    server_name your-university-domain.example;
+
+    location / {
+        # Must match the host port published in compose.yaml
+        proxy_pass http://127.0.0.1:8082;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

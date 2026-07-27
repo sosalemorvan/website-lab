@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    ports:
+      # Host port is a placeholder — pick a free port on your VPS
+      # (check with `ss -ltnp`) and update it here before deploying.
+      - "8082:3000"
+    environment:
+      - NODE_ENV=production
